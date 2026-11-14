@@ -1,0 +1,21 @@
+# SOWA-LIVO v0.8 overlay. Apply on top of the existing sensor/calibration config.
+sowa:
+  enabled: true
+  visual_enabled: true
+  relative_cutoff: 0.01
+  rank_relative_tolerance: 1.0e-10
+  zero_information_relative_tolerance: 1.0e-12
+  visual_priority_enabled: true
+  visual_priority_score_min: 0.70
+  visual_priority_residual_max: 1.0
+  visual_priority_gain_max: 1.50
+  visual_route_a_enabled: true
+  visual_route_a_only: false
+  visual_route_a_min_orthogonal_scale: 0.25
+  visual_route_a_calibration_gain: 26.630767801197237
+  visual_priority_stable_gate_enabled: true
+  visual_priority_min_consecutive_frames: 3
+  visual_priority_release_consecutive_frames: 2
+  visual_priority_score_ema_alpha: 0.25
+  visual_priority_stability_tolerance: 0.08
+  visual_priority_innovation_zero_tolerance: 0.25
