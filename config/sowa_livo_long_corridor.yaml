@@ -1,4 +1,4 @@
-# SOWA-LIVO v0.8 overlay. Apply on top of the existing sensor/calibration config.
+# SOWA-LIVO long-corridor profile. Apply over the sensor/calibration configuration.
 sowa:
   enabled: true
   visual_enabled: true

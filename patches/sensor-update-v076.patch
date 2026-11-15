@@ -10,14 +10,14 @@ index 0652aab..0000000 100755
 +add_library(sowa_core SHARED IMPORTED)
 +set_target_properties(sowa_core PROPERTIES
 +  IMPORTED_LOCATION "${SOWA_RUNTIME_DIR}/lib/libsowa_core.so")
-+add_library(sowa_fastlivo2_adapter SHARED sowa_adapter/src/doa_axis_scheduler.cpp)
-+target_include_directories(sowa_fastlivo2_adapter PRIVATE
++add_library(sowa_ros_adapter SHARED sowa_adapter/src/doa_axis_scheduler.cpp)
++target_include_directories(sowa_ros_adapter PRIVATE
 +  include sowa_adapter/include sowa_runtime/include ${catkin_INCLUDE_DIRS})
-+target_link_libraries(sowa_fastlivo2_adapter sowa_core ${catkin_LIBRARIES})
-+target_compile_features(sowa_fastlivo2_adapter PUBLIC cxx_std_17)
-+target_compile_definitions(sowa_fastlivo2_adapter PRIVATE
++target_link_libraries(sowa_ros_adapter sowa_core ${catkin_LIBRARIES})
++target_compile_features(sowa_ros_adapter PUBLIC cxx_std_17)
++target_compile_definitions(sowa_ros_adapter PRIVATE
 +  EIGEN_MAX_ALIGN_BYTES=16 EIGEN_MAX_STATIC_ALIGN_BYTES=16)
-+set_target_properties(sowa_fastlivo2_adapter PROPERTIES POSITION_INDEPENDENT_CODE ON)
++set_target_properties(sowa_ros_adapter PROPERTIES POSITION_INDEPENDENT_CODE ON)
 +
  # Add libraries
  add_library(vio src/vio.cpp src/frame.cpp src/visual_point.cpp)
@@ -25,22 +25,12 @@ index 0652aab..0000000 100755
  add_library(pre src/preprocess.cpp)
  add_library(imu_proc src/IMU_Processing.cpp)
  add_library(laser_mapping src/LIVMapper.cpp)
-+target_link_libraries(lio sowa_fastlivo2_adapter sowa_core)
-+target_link_libraries(vio sowa_fastlivo2_adapter sowa_core)
-+target_link_libraries(laser_mapping sowa_fastlivo2_adapter sowa_core)
++target_link_libraries(lio sowa_ros_adapter sowa_core)
++target_link_libraries(vio sowa_ros_adapter sowa_core)
++target_link_libraries(laser_mapping sowa_ros_adapter sowa_core)
  
- # Add the main executable
- add_executable(fastlivo_mapping src/main.cpp)
- 
- # Link libraries to the executable
- target_link_libraries(fastlivo_mapping
-+  sowa_fastlivo2_adapter
-+  sowa_core
-   laser_mapping
-   vio
-   lio
 diff --git a/include/LIVMapper.h b/include/LIVMapper.h
-index 46664d2..0000000 100755
+index 46664d2..0000000 100644
 --- a/include/LIVMapper.h
 +++ b/include/LIVMapper.h
 @@ -15,6 +15,7 @@ which is included as part of this source code package.

@@ -6,4 +6,4 @@ Permission is granted to download and use the SOWA-LIVO binary extension for aca
 
 The source code of the binary core is planned for public release after acceptance of the associated paper.
 
-This license covers only the SOWA-LIVO binary core. It does not replace the licenses of FAST-LIVO2 or other third-party components.
+This license covers only the SOWA-LIVO binary core. Third-party components retain their own licenses and copyright notices.
