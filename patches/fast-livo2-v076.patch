@@ -15,6 +15,8 @@ index 0652aab..0000000 100755
 +  include sowa_adapter/include sowa_runtime/include ${catkin_INCLUDE_DIRS})
 +target_link_libraries(sowa_fastlivo2_adapter sowa_core ${catkin_LIBRARIES})
 +target_compile_features(sowa_fastlivo2_adapter PUBLIC cxx_std_17)
++target_compile_definitions(sowa_fastlivo2_adapter PRIVATE
++  EIGEN_MAX_ALIGN_BYTES=16 EIGEN_MAX_STATIC_ALIGN_BYTES=16)
 +set_target_properties(sowa_fastlivo2_adapter PROPERTIES POSITION_INDEPENDENT_CODE ON)
 +
  # Add libraries

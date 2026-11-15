@@ -10,6 +10,10 @@ release_tag="v0.1.0"
 asset_name="sowa-livo-extension-v0.1.0-ubuntu20.04-amd64.tar.gz"
 release_url="https://github.com/Zhuyicheng-HIT/SOWA-LIVO/releases/download/${release_tag}"
 
+if [[ "$(uname -m)" != "x86_64" ]]; then
+  printf 'This release targets Linux x86_64.\n' >&2
+  exit 2
+fi
 if [[ ! -f /opt/ros/noetic/setup.bash ]]; then
   printf 'ROS Noetic is required. Use Ubuntu 20.04 with the upstream FAST-LIVO2 dependencies installed.\n' >&2
   exit 2
@@ -52,8 +56,8 @@ if [[ ! -f "$fast_livo_dir/.sowa_extension_installed" ]]; then
   cmake --build "$tmp_dir/Sophus/build" --parallel
   "${sudo_cmd[@]}" cmake --install "$tmp_dir/Sophus/build"
 
-  curl -fL "$release_url/$asset_name" -o "$tmp_dir/$asset_name"
-  curl -fL "$release_url/SHA256SUMS.txt" -o "$tmp_dir/SHA256SUMS.txt"
+  curl --retry 3 --connect-timeout 30 -fL "$release_url/$asset_name" -o "$tmp_dir/$asset_name"
+  curl --retry 3 --connect-timeout 30 -fL "$release_url/SHA256SUMS.txt" -o "$tmp_dir/SHA256SUMS.txt"
   (cd "$tmp_dir" && grep " $asset_name$" SHA256SUMS.txt | sha256sum -c -)
   mkdir -p "$fast_livo_dir/sowa_runtime"
   tar -xzf "$tmp_dir/$asset_name" -C "$fast_livo_dir/sowa_runtime"
