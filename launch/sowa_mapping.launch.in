@@ -1,0 +1,7 @@
+<launch>
+  <arg name="rviz" default="true" />
+  <rosparam command="load" file="$(find @ESTIMATOR_PACKAGE@)/config/sowa_livo_long_corridor.yaml" />
+  <include file="$(find @ESTIMATOR_PACKAGE@)/launch/mapping_avia.launch">
+    <arg name="rviz" value="$(arg rviz)" />
+  </include>
+</launch>

@@ -2,10 +2,10 @@
 set -euo pipefail
 
 repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-workspace="${1:-$HOME/sowa_fast_livo2_ws}"
-image="sowa-livo-fast-livo2:noetic-v0.1.0"
+workspace="${1:-$HOME/sowa_ws}"
+image="sowa:noetic-v0.1.0"
 workspace_name="$(basename "$workspace" | tr '[:upper:]' '[:lower:]' | tr -cs 'a-z0-9_.-' '-')"
-container="sowa-fast-livo2-${workspace_name}"
+container="sowa-${workspace_name}"
 
 command -v docker >/dev/null || {
   printf 'Docker is required for the WSL/Windows deployment path.\n' >&2
@@ -23,7 +23,7 @@ if ! docker container inspect "$container" >/dev/null 2>&1; then
 else
   docker start "$container" >/dev/null
 fi
-docker exec "$container" bash -lc 'source /opt/ros/noetic/setup.bash && bash /sowa/scripts/deploy_fast_livo2.sh /workspace'
+docker exec "$container" bash -lc 'source /opt/ros/noetic/setup.bash && bash /sowa/scripts/install.sh /workspace'
 
-printf '\nBuilt SOWA-integrated FAST-LIVO2 in %s\n' "$workspace"
-printf 'Run it with: docker exec -it %s bash -lc "source /opt/ros/noetic/setup.bash && source /workspace/devel/setup.bash && roslaunch fast_livo sowa_mapping_avia.launch"\n' "$container"
+printf '\nBuilt SOWA workspace in %s\n' "$workspace"
+printf 'Run it with: docker exec -it %s bash -lc "bash /sowa/scripts/run.sh /workspace"\n' "$container"
