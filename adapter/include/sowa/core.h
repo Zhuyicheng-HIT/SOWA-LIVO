@@ -1,5 +1,16 @@
 #pragma once
 
+#if (defined(EIGEN_MAX_ALIGN_BYTES) && EIGEN_MAX_ALIGN_BYTES != 16) || \
+    (defined(EIGEN_MAX_STATIC_ALIGN_BYTES) && EIGEN_MAX_STATIC_ALIGN_BYTES != 16)
+#error "SOWA v0.1 binary ABI requires Eigen maximum alignment of 16 bytes"
+#endif
+#ifndef EIGEN_MAX_ALIGN_BYTES
+#define EIGEN_MAX_ALIGN_BYTES 16
+#endif
+#ifndef EIGEN_MAX_STATIC_ALIGN_BYTES
+#define EIGEN_MAX_STATIC_ALIGN_BYTES 16
+#endif
+
 #include <Eigen/Core>
 
 #include <cstdint>

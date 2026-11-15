@@ -14,6 +14,8 @@ target_include_directories(sowa_fastlivo2_adapter
 )
 target_link_libraries(sowa_fastlivo2_adapter PUBLIC SOWA::core ${catkin_LIBRARIES})
 target_compile_features(sowa_fastlivo2_adapter PUBLIC cxx_std_17)
+target_compile_definitions(sowa_fastlivo2_adapter PUBLIC
+  EIGEN_MAX_ALIGN_BYTES=16 EIGEN_MAX_STATIC_ALIGN_BYTES=16)
 set_target_properties(sowa_fastlivo2_adapter PROPERTIES
   BUILD_RPATH "$ORIGIN"
   INSTALL_RPATH "$ORIGIN"
@@ -32,4 +34,7 @@ if(BUILD_TESTING)
   add_executable(sowa_adapter_link_smoke tests/link_smoke.cpp)
   target_link_libraries(sowa_adapter_link_smoke PRIVATE sowa_fastlivo2_adapter)
   add_test(NAME sowa_adapter_link_smoke COMMAND sowa_adapter_link_smoke)
+  add_executable(sowa_core_abi_smoke tests/core_abi_smoke.cpp)
+  target_link_libraries(sowa_core_abi_smoke PRIVATE sowa_fastlivo2_adapter)
+  add_test(NAME sowa_core_abi_smoke COMMAND sowa_core_abi_smoke)
 endif()
