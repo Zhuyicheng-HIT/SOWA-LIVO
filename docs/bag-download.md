@@ -1,6 +1,6 @@
 # Long-L Corridor Bag
 
-The v0.1.0 GitHub Release carries the frozen rich-texture seed 7 sensor bag as two assets because each GitHub release asset must stay below 2 GiB.
+The frozen rich-texture seed 7 sensor bag is split into two files for distribution as GitHub Release assets. Each part is smaller than 2 GiB.
 
 - `hospital-l-corridor-rich-seed7-v2-sensors.bag.part-001`
 - `hospital-l-corridor-rich-seed7-v2-sensors.bag.part-002`
