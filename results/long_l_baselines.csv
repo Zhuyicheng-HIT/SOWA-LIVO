@@ -1,0 +1,5 @@
+method,implementation,run_count,x_rmse_m,y_rmse_m,z_rmse_m,rmse_3d_m,x_repeat_std_m,y_repeat_std_m,z_repeat_std_m,rmse_3d_repeat_std_m,source_run_ids
+Pure VIO,OpenVINS r3,1,1.0489961643,0.3093076922,0.2796197576,1.1288274492,,,,,baseline_refresh_20261103_vio_r3
+Pure LIO,LIO-only estimator with visual fusion disabled,1,576.2385743024,5.4320665227,0.4938913475,576.2643887917,,,,,baseline_refresh_20261103_lio_r4_pristine
+Official tightly coupled baseline,mean of three existing full LIVO runs,3,0.8872350644,0.2896193226,0.1812687991,0.9524279323,0.0513603053,0.0448617302,0.0092075737,0.0392435717,hospital_l_excited_rich_rgb_seed7_v2/official_r1;official_r2;official_r3
+SOWA-LIVO,SOWA v0.7.6 existing full-L run,1,0.4643875885,0.2077793295,0.0430562735,0.5105701957,,,,,final_v076_route_a_long_l_r1

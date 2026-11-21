@@ -1,58 +1,45 @@
 # SOWA-LIVO
 
-**Spatial Observability-aware Weight Adaptation**
+### Spatial Observability-aware Weight Adaptation
 
-[简体中文](README.zh-CN.md)
+**Direction-aware information weighting for tightly coupled LiDAR, visual, and inertial localization.**
 
-SOWA-LIVO adapts the information contributed by LiDAR and visual measurements according to their spatial observability. In long corridors, it preserves strong geometric constraints and uses complementary visual information along weakly constrained directions.
+[![Release](https://img.shields.io/github/v/release/Zhuyicheng-HIT/SOWA-LIVO?display_name=tag&color=168aad)](https://github.com/Zhuyicheng-HIT/SOWA-LIVO/releases/latest)
+[![License](https://img.shields.io/badge/license-GPL--2.0-blue)](LICENSE)
+[![Ubuntu](https://img.shields.io/badge/Ubuntu-20.04-e76f51)](docs/build.md)
+[![ROS](https://img.shields.io/badge/ROS-Noetic-457b9d)](docs/build.md)
 
-This repository provides an independent, ROS-free C++ binary core, a lightweight ROS 1 adapter, and deployment scripts. The core source code will be released upon acceptance of the associated paper.
+[简体中文](README.zh-CN.md) · [Releases](https://github.com/Zhuyicheng-HIT/SOWA-LIVO/releases)
 
-## Installation
+![L-shaped corridor simulation](docs/images/hospital_l_corridor_preview.png)
 
-For Ubuntu 20.04 with ROS Noetic:
+The paired scene uses identical geometry with rich and low-texture surfaces:
 
-```bash
-git clone https://github.com/Zhuyicheng-HIT/SOWA-LIVO.git
-cd SOWA-LIVO
-bash scripts/install.sh "$HOME/sowa_ws"
-```
+![Rich and low-texture corridor textures](docs/images/hospital_moving_texture_contact_sheet.png)
 
-For Windows with WSL2 and Docker, run from a WSL checkout:
+## Method
 
-```bash
-bash scripts/install_docker.sh "$HOME/sowa_ws"
-```
+SOWA evaluates directional responses in the measurement Jacobian, separates a target direction from coupled state responses, and adapts the contribution of that measurement subspace. Reliable visual information remains in the coupled estimator update.
 
-The scripts fetch the required dependencies, download and verify the SOWA binary package, install the adapter and long-corridor profile, and build the workspace. The Docker option creates a persistent Noetic container and prints its launch command.
+For measurement Jacobian $H$ and covariance $R$, the whitened block is $A=R^{-1/2}H$. A direction is evaluated after projecting out the other mapped directions and nuisance-state responses. The selected measurement mode can then be softly retained while its orthogonal complement is scaled, applying the same transform to $A$ and the whitened residual.
 
-After a native installation:
+## Recorded result
 
-```bash
-bash scripts/run.sh "$HOME/sowa_ws"
-```
+The best recorded full-route replay is v0.7.6: x/y/z RMSE 0.4644/0.2078/0.0431 m and 3D RMSE 0.5106 m over 2441 samples at fixed metric scale.
 
-The launch configuration loads the SOWA long-corridor profile. Set the LiDAR, IMU, RGB topics, camera calibration, and extrinsics for your sensor setup.
+| Method | x RMSE (m) | y RMSE (m) | z RMSE (m) | 3D RMSE (m) |
+| --- | ---: | ---: | ---: | ---: |
+| Pure VIO | 1.0490 | 0.3093 | 0.2796 | 1.1288 |
+| Pure LIO | 576.2386 | 5.4321 | 0.4939 | 576.2644 |
+| Tightly coupled baseline | 0.8872 | 0.2896 | 0.1813 | 0.9524 |
+| **SOWA-LIVO v0.7.6** | **0.4644** | **0.2078** | **0.0431** | **0.5106** |
 
-## Binary package and interfaces
+Exact run inputs and their hashes are documented in [the v0.7.6 audit](docs/code-audit-v076.md).
 
-Release `v0.1.0` targets Linux x86_64, Ubuntu 20.04, GCC 9.4, and Eigen 3.3.7. It contains `libsowa_core.so`, public interface headers, CMake package files, and license notes. The ROS adapter is compiled locally during installation.
+## Source
 
-The core interface accepts a Jacobian, residual, measurement covariance, and state-direction maps through `SOWA::core`. The ROS adapter connects measurement updates to that interface. See [`adapter/README.md`](adapter/README.md) and [`docs/binary-build-info.md`](docs/binary-build-info.md).
-
-## Long-corridor reference result
-
-The recorded full L-corridor run uses SOWA-LIVO v0.7.6 Dynamic Route A, with 2441 evaluation samples:
-
-| Metric | RMSE (m) |
-| --- | ---: |
-| x | 0.464388 |
-| y | 0.207779 |
-| z | 0.043056 |
-| 3D | 0.510570 |
-
-The binary package has its own release version and SHA-256 checksum. Dataset asset names and Windows/WSL reconstruction commands are documented in [`docs/bag-download.md`](docs/bag-download.md).
+The complete estimator source is in estimator/, the C++ core in estimator/sowa_core/, the Gazebo scene and capture tools in simulation/, and existing metrics in results/. See docs/build.md for dependencies and build steps.
 
 ## License
 
-The SOWA binary core is distributed under [LICENSE-BINARY.md](LICENSE-BINARY.md). The adapter and integration patch use the GPLv2 terms included in [`adapter/COPYING`](adapter/COPYING). Third-party components retain their respective licenses and copyright notices.
+Estimator and SOWA core sources use GPL-2.0. Scene assets retain their individual notices. Original source copyright and license headers are retained.

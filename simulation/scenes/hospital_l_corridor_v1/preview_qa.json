@@ -1,0 +1,58 @@
+{
+  "status": "passed",
+  "geometry_identical_after_material_removal": true,
+  "actual_rgb_preview_views_per_condition": 6,
+  "actual_range_samples_compared": 138240,
+  "paired_ranges_all_identical": true,
+  "pairs": [
+    {
+      "view": "01_main_entrance",
+      "range_samples": 23040,
+      "ranges_bit_identical": true,
+      "rich_corners": 367,
+      "low_corners": 71,
+      "rgb_mean_absolute_difference_dn": 9.755635609567902
+    },
+    {
+      "view": "02_long_straight",
+      "range_samples": 23040,
+      "ranges_bit_identical": true,
+      "rich_corners": 158,
+      "low_corners": 62,
+      "rgb_mean_absolute_difference_dn": 9.971971450617284
+    },
+    {
+      "view": "03_approach_corner",
+      "range_samples": 23040,
+      "ranges_bit_identical": true,
+      "rich_corners": 227,
+      "low_corners": 40,
+      "rgb_mean_absolute_difference_dn": 8.141700906635803
+    },
+    {
+      "view": "04_l_corner",
+      "range_samples": 23040,
+      "ranges_bit_identical": true,
+      "rich_corners": 308,
+      "low_corners": 113,
+      "rgb_mean_absolute_difference_dn": 10.054960455246913
+    },
+    {
+      "view": "05_return_leg",
+      "range_samples": 23040,
+      "ranges_bit_identical": true,
+      "rich_corners": 295,
+      "low_corners": 81,
+      "rgb_mean_absolute_difference_dn": 10.159256847993827
+    },
+    {
+      "view": "06_closed_doors",
+      "range_samples": 23040,
+      "ranges_bit_identical": true,
+      "rich_corners": 283,
+      "low_corners": 104,
+      "rgb_mean_absolute_difference_dn": 6.802364486882716
+    }
+  ],
+  "scope": "Scene geometry and fixed-pose RGB/flash-LiDAR inspection; no trajectory accuracy evaluation in this QA"
+}

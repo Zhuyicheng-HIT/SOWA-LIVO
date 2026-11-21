@@ -1,0 +1,106 @@
+{
+  "profile": {
+    "id": "hospital_l_v1",
+    "duration_s": 139.0,
+    "speed_straight_mps": 1.8,
+    "static_s": [
+      0.0,
+      5.0
+    ],
+    "initialization_motion_s": [
+      5.0,
+      13.0
+    ],
+    "main_translation_s": [
+      13.0,
+      82.27777777777777
+    ],
+    "turn_s": [
+      82.27777777777777,
+      90.27777777777777
+    ],
+    "return_translation_s": [
+      90.27777777777777,
+      134.55555555555554
+    ],
+    "final_static_s": [
+      134.55555555555554,
+      139.0
+    ],
+    "turn_control_xy_m": [
+      [
+        -5.0,
+        99.0
+      ],
+      [
+        -5.0,
+        101.88
+      ],
+      [
+        -5.0,
+        104.76
+      ],
+      [
+        -4.76,
+        105.0
+      ],
+      [
+        -1.88,
+        105.0
+      ],
+      [
+        1.0,
+        105.0
+      ]
+    ],
+    "world_origin_body_start": [
+      -5.0,
+      -23.0,
+      1.55
+    ],
+    "world_rotation_initial_body": [
+      [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      [
+        1.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "evaluation_windows_absolute_s": {
+      "whole": [
+        1016.0,
+        1138.0
+      ],
+      "main_middle": [
+        1025.0,
+        1065.0
+      ],
+      "turn": [
+        1082.2777777777778,
+        1090.2777777777778
+      ],
+      "return_middle": [
+        1104.0,
+        1120.0
+      ]
+    },
+    "evaluation_policy": "Same fixed 20 Hz grid, scale 1 and first-pose alignment; whole-run alignment retained for phase errors; additional phase-local RPE.",
+    "source_module_sha256": "21e8da97bd22bbb30ae258ffcd63a1449ac42139bb9634d42f629f683c402cab",
+    "initialization_source_sha256": "52bca2865db35cefb33d32562088bded85b4265ac2c89e5642590c0b9e22d75f"
+  },
+  "max_speed_mps": 1.800000000145019,
+  "max_accel_mps2": 0.899999719194966,
+  "max_angular_speed_radps": 0.5454531153517309,
+  "minimum_wall_segment_distance_m": 2.372669890395631,
+  "rotation_so3": "passed",
+  "continuity": "passed"
+}

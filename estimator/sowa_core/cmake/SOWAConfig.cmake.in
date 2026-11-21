@@ -1,0 +1,13 @@
+@PACKAGE_INIT@
+
+include(CMakeFindDependencyMacro)
+find_dependency(Eigen3 3.3 REQUIRED)
+
+include("${CMAKE_CURRENT_LIST_DIR}/SOWATargets.cmake")
+
+if(NOT TARGET Eigen3::Eigen)
+  set_property(TARGET SOWA::core APPEND PROPERTY
+    INTERFACE_INCLUDE_DIRECTORIES "${EIGEN3_INCLUDE_DIRS}"
+  )
+endif()
+

@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 3.12)
+project(sowa_package_consumer LANGUAGES CXX)
+find_package(SOWA 0.1 CONFIG REQUIRED)
+add_executable(sowa_package_consumer main.cpp)
+target_link_libraries(sowa_package_consumer PRIVATE SOWA::core)
